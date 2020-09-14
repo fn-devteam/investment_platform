@@ -1,5 +1,6 @@
 package com.investment.manager.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -43,5 +44,9 @@ public class UserService {
     public void delete(Long id) {
 
         userRepository.deleteById(id);
+    }
+
+    public List<UserDTO> getAll() {
+        return userMapper.toDTOs(userRepository.findAll());
     }
 }

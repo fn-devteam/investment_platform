@@ -12,35 +12,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.investment.manager.dto.UserDTO;
-import com.investment.manager.service.UserService;
+import com.investment.manager.dto.BankDTO;
+import com.investment.manager.service.BankService;
 
 import javassist.NotFoundException;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/banks")
+public class BankController {
 
     @Autowired
-    private UserService userService;
+    private BankService bankService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void create(@RequestParam("user") UserDTO dto) {
-        userService.create(dto);
+    public void create(@RequestParam("bank") BankDTO dto) {
+        bankService.create(dto);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> getAll() throws NotFoundException {
-        return userService.getAll();
+    public List<BankDTO> getAll() throws NotFoundException {
+        return bankService.getAll();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO findById(@PathVariable("id") Long id) throws NotFoundException {
-        return userService.get(id);
+    public BankDTO findById(@PathVariable("id") Long id) throws NotFoundException {
+        return bankService.get(id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") Long id) {
-        userService.delete(id);
+        bankService.delete(id);
     }
 }
