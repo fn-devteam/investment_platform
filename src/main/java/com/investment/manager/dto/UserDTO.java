@@ -23,7 +23,7 @@ public class UserDTO extends BaseDTO implements Serializable {
 
     private Calendar createdAt;
 
-    private Profile profile;
+    //private Profile profile;
 
     private List<String> emails;
 }
