@@ -15,15 +15,17 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class UserDTO extends BaseDTO implements Serializable {
+public class UserDTO implements Serializable {
 
-    private String name;
+	protected String id;
+	
+	private String name;
 
     private String password;
 
     private Calendar createdAt;
 
-    //private Profile profile;
+    private Profile profile;
 
     private List<String> emails;
 }

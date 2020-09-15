@@ -1,10 +1,12 @@
 package com.investment.manager.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -13,29 +15,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
 @DynamicUpdate
-public class Account {
-
+public class StockType {
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 	
-    @ManyToOne
-    private Bank bank;
+	String name;
+	
+	@OneToMany
+	List<Stock> stocks;
 
-    private String agency;
-
-    private String digit;
-
-    private String accountNumber;
-
-    private String accountDigit;
-
-    @ManyToOne
-    private User user;
 }

@@ -11,8 +11,10 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class BankDTO extends BaseDTO implements Serializable {
-
+public class BankDTO implements Serializable {
+	
+	protected String id;
+	
     private String name;
 
     private Long code;
