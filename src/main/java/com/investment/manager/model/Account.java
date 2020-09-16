@@ -1,6 +1,9 @@
 package com.investment.manager.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,8 +19,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @DynamicUpdate
-public class Account extends BaseModel {
+public class Account {
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
     @ManyToOne
     private Bank bank;
 
