@@ -22,9 +22,8 @@ public class Bank {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long code;
 	
     private String name;
 
-    private Long code;
 }
