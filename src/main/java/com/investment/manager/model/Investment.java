@@ -60,7 +60,7 @@ public class Investment {
 	@ManyToOne
 	private User client;
 	
-	@OneToMany( mappedBy = "id")
+	@OneToMany( mappedBy = "investment")
 	private List<InvestmentStatus> status;
 	
 	

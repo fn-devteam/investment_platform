@@ -55,7 +55,7 @@ public class Stock {
 
 	private Double quotaValue;
 
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "stock")
 	private List<StockStatus> status;
 
 }

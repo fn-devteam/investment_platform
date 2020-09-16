@@ -29,7 +29,7 @@ public class StockType {
 	
 	private String name;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "type")
 	private List<Stock> stocks;
 
 }
