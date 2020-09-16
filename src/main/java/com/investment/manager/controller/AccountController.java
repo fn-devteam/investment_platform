@@ -22,7 +22,7 @@ import javassist.NotFoundException;
 public class AccountController {
 
 	@Autowired
-	AccountService accountService;
+	private AccountService accountService;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void create(@RequestParam("account") AccountDTO account) {

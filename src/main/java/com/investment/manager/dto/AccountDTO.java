@@ -5,18 +5,20 @@ import java.io.Serializable;
 import com.investment.manager.model.Bank;
 import com.investment.manager.model.User;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
+@Builder
 public class AccountDTO implements Serializable{
 
-	 protected Long id;
+	 private Long id;
 	
 	 private Bank bank;
 
