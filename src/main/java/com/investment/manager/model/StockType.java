@@ -25,11 +25,11 @@ public class StockType {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+	private Long id;
 	
-	String name;
+	private String name;
 	
 	@OneToMany
-	List<Stock> stocks;
+	private List<Stock> stocks;
 
 }

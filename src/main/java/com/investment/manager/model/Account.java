@@ -23,7 +23,7 @@ public class Account {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+	private Long id;
 	
     @ManyToOne
     private Bank bank;

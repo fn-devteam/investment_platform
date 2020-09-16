@@ -28,40 +28,40 @@ public class Investment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+	private Long id;
 	
 	@ManyToOne
-	Stock stock;
+	private Stock stock;
 
-	String notice;
+	private String notice;
 	
-	Double liquidity;
+	private Double liquidity;
 	
-	Double investedValue;
+	private Double investedValue;
 	
-	Double profitPercent;
+	private Double profitPercent;
 	
-	Double profit;
+	private Double profit;
 	
-	Double quantAcquired;
+	private Double quantAcquired;
 	
-	Double quotaValue;
+	private Double quotaValue;
 	
 	@CreatedDate
-	Calendar creationDate;
+	private Calendar creationDate;
 	
-	Calendar startInvestment;
+	private Calendar startInvestment;
 	
-	Calendar endInvestment;
-	
-	@ManyToOne
-	User broker;
+	private Calendar endInvestment;
 	
 	@ManyToOne
-	User client;
+	private User broker;
 	
-	@OneToMany
-	List<InvestmentStatus> status;
+	@ManyToOne
+	private User client;
+	
+	@OneToMany( mappedBy = "id")
+	private List<InvestmentStatus> status;
 	
 	
 	

@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -35,19 +34,14 @@ public class User {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+	private Long id;
 
     private String name;
 
     private String password;
-    
-    private Address address;
-    
-    @ManyToOne
-    private Company company;
-    
+        
     @OneToMany
-    private Investment investment;
+    private List<Investment> investment;
 
     @CreatedDate
     private Calendar createdAt;

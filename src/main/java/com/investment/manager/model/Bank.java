@@ -22,7 +22,7 @@ public class Bank {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+	private Long id;
 	
     private String name;
 

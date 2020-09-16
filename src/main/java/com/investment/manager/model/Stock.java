@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedBy;
@@ -30,30 +31,31 @@ public class Stock {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	StockType type;
+	private StockType type;
 
-	String name;
+	private String name;
 	
 	@CreatedBy
-	User creator;
+	@OneToOne
+	private User creator;
 
 	@CreatedDate
-	Date creationDate;
+	private Date creationDate;
 	
-	String description;
+	private String description;
 
-	Double liquidity;
+	private Double liquidity;
 
-	Double profitPercent;
+	private Double profitPercent;
 
-	Double availQuantity;
+	private Double availQuantity;
 
-	Double quotaValue;
+	private Double quotaValue;
 
-	@OneToMany
-	List<StockStatus> status;
+	@OneToMany(mappedBy = "id")
+	private List<StockStatus> status;
 
 }

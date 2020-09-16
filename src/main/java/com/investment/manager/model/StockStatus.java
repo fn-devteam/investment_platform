@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,20 +29,21 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicUpdate
+@Table(name="stock_status")
 public class StockStatus {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+	private Long id;
 	
 	@Enumerated(EnumType.STRING)
-	Status status;
+	private Status status;
 	
 	@ManyToOne
-	List<Stock> stocks;
+	private Stock stock;
 	
 	@OneToMany
-	List<User> user;
+	private List<User> users;
 	
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
