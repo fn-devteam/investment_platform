@@ -38,14 +38,14 @@ public class AccountController {
 
 	}
 
-	@GetMapping(name = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public AccountDTO getById(@PathVariable("id") Long id) throws NotFoundException {
 
 		return accountService.get(id);
 
 	}
 
-	@DeleteMapping(name = "/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable("id") Long id) throws NotFoundException {
 
 		accountService.delete(id);
