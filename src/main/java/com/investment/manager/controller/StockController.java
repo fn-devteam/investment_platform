@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,30 +22,29 @@ import javassist.NotFoundException;
 public class StockController {
 
 	@Autowired
-	StockService stockService;
+	private StockService stockService;
 
-	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void create(@RequestParam("stock") StockDTO dto) {
 
 		stockService.create(dto);
 
 	}
 
-	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<StockDTO> getAll() {
-
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<StockDTO> getAll() throws NotFoundException {
 		return stockService.getAll();
 
 	}
 
-	@RequestMapping(name = "id", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public StockDTO getById(@PathVariable("id") Long id) throws NotFoundException {
 
 		return stockService.get(id);
 
 	}
 
-	@DeleteMapping(name = "id", produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void delete(@PathVariable("id") Long id) throws NotFoundException {
 
 		stockService.delete(id);
