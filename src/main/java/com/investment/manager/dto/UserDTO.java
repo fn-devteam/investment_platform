@@ -6,15 +6,17 @@ import java.util.List;
 
 import com.investment.manager.model.Profile;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
+@Builder
 public class UserDTO implements Serializable {
 
 	protected String id;
