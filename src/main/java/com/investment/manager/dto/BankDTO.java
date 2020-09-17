@@ -2,20 +2,21 @@ package com.investment.manager.dto;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
+@Builder
 public class BankDTO implements Serializable {
 	
-	protected String id;
+	private Long code;
 	
     private String name;
 
-    private Long code;
 }
