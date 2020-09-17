@@ -19,7 +19,7 @@ import lombok.Setter;
 @Builder
 public class UserDTO implements Serializable {
 
-	protected String id;
+	private String id;
 	
 	private String name;
 
