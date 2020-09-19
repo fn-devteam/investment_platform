@@ -1,11 +1,14 @@
 package com.investment.manager.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.investment.manager.dto.UserDTO;
@@ -45,8 +48,16 @@ public class UserService {
 
         userRepository.deleteById(id);
     }
-
-    public List<UserDTO> getAll() {
-        return userMapper.toDTOs(userRepository.findAll());
+    
+    
+    public Page<UserDTO> getAll() {
+    
+    	int page =0;
+    	int size=10;
+    	
+    	@SuppressWarnings("static-access")
+		PageRequest pageRequest = PageRequest.of(page, size,Sort.DEFAULT_DIRECTION.ASC,"name");
+        
+    	return new PageImpl<>(userMapper.toDTOs(userRepository.findAll()), pageRequest,size);
     }
 }
