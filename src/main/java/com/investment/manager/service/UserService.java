@@ -52,8 +52,8 @@ public class UserService {
     
     public Page<UserDTO> getAll() {
     
-    	int page =0;
-    	int size=10;
+    	int page = 0;
+    	int size = 10;
     	
     	@SuppressWarnings("static-access")
 		PageRequest pageRequest = PageRequest.of(page, size,Sort.DEFAULT_DIRECTION.ASC,"name");

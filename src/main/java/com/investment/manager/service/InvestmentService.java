@@ -1,11 +1,14 @@
 package com.investment.manager.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.investment.manager.dto.InvestmentDTO;
@@ -17,13 +20,27 @@ import javassist.NotFoundException;
 
 @Service
 @Transactional
-public class InvestmentService {
+public class InvestmentService{
 
 	@Autowired
 	private InvestmentRepository investmentRepository;
 
 	@Autowired
 	private InvestmentMapper investmentMapper;
+
+	public Page<Investment> searchByCLient(String searchTerm, int page, int size) {
+
+		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "name");
+
+		return investmentRepository.searchByClient(searchTerm.toLowerCase(), pageRequest);
+	}
+
+	public Page<Investment> searchByBroker(String searchTerm, int page, int size) {
+
+		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "name");
+
+		return investmentRepository.searchByBroker(searchTerm.toLowerCase(), pageRequest);
+	}
 
 	public void create(InvestmentDTO dto) {
 		Investment investment = investmentMapper.toEntity(dto);
@@ -39,9 +56,11 @@ public class InvestmentService {
 		throw new NotFoundException("Investment not found");
 	}
 
-	public List<InvestmentDTO> getAll() {
+	public Page<InvestmentDTO> getAll(int page, int size) {
 
-		return investmentMapper.toDTOs(investmentRepository.findAll());
+		PageRequest pageRequest = PageRequest.of(page, size, Sort.DEFAULT_DIRECTION.ASC);
+
+		return new PageImpl<>(investmentMapper.toDTOs(investmentRepository.findAll()), pageRequest, size);
 
 	}
 
