@@ -17,6 +17,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class AccountDTO implements Serializable{
+	
+	 private static final long serialVersionUID = 1L;
 
 	 private Long id;
 	

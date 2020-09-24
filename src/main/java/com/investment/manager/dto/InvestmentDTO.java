@@ -1,5 +1,6 @@
 package com.investment.manager.dto;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,8 +19,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InvestmentDTO {
+public class InvestmentDTO implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 
 	private Stock stock;

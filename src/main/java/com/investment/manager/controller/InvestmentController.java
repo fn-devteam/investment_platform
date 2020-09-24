@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.investment.manager.dto.InvestmentDTO;
+import com.investment.manager.dto.UserDTO;
 import com.investment.manager.service.InvestmentService;
 
 import javassist.NotFoundException;
@@ -42,6 +43,24 @@ public class InvestmentController {
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) {
 
 		return investmentService.getAll(page, size);
+
+	}
+
+	@GetMapping(value = "/broker/{broker}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<InvestmentDTO> getByBroker(@RequestParam("broker") UserDTO broker,
+			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
+
+		return investmentService.searchByBroker(broker, page, size);
+
+	}
+
+	@GetMapping(value = "/client/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<InvestmentDTO> getByClient(@RequestParam("id") UserDTO client,
+			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
+
+		return investmentService.searchByCLient(client, page, size);
 
 	}
 

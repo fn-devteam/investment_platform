@@ -15,6 +15,8 @@ import lombok.Setter;
 @Builder
 public class BankDTO implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private Long code;
 	
     private String name;
