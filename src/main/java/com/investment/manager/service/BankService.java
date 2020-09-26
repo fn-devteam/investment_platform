@@ -6,6 +6,11 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.investment.manager.dto.BankDTO;
@@ -31,7 +36,7 @@ public class BankService {
         bankRepository.save(bank);
     }
 
-    public BankDTO get(Long id) throws NotFoundException {
+    public BankDTO getById(String id) throws NotFoundException {
 
         Optional<Bank> bank = bankRepository.findById(id);
 
@@ -41,12 +46,15 @@ public class BankService {
         throw new NotFoundException("Bank not found");
     }
 
-    public void delete(Long id) {
-
+     public void delete(String id) {
         bankRepository.deleteById(id);
     }
 
-    public List<BankDTO> getAll() {
-        return bankMapper.toDTOs(bankRepository.findAll());
+    public Page<BankDTO> getAll(int page, int size) {
+    	
+		Pageable pageRequest = PageRequest.of(page, size);
+    	Page<Bank> banks = bankRepository.findAll(pageRequest);
+    	List<BankDTO> bankDtos = bankMapper.toDTOs(banks.getContent());
+    	return new PageImpl<>(bankDtos, pageRequest, banks.getTotalElements());
     }
 }
