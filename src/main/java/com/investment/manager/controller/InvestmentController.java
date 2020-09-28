@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.investment.manager.dto.InvestmentDTO;
-import com.investment.manager.dto.UserDTO;
 import com.investment.manager.service.InvestmentService;
 
 import javassist.NotFoundException;
@@ -46,23 +45,26 @@ public class InvestmentController {
 
 	}
 
-	@GetMapping(value = "/broker/{broker}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Page<InvestmentDTO> getByBroker(@RequestParam("broker") UserDTO broker,
+	@GetMapping(value = "/broker/{investment}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<InvestmentDTO> getByBroker(@RequestParam("broker") Long broker,
 			@RequestParam(value = "page", required = false) int page,
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
 
 		return investmentService.searchByBroker(broker, page, size);
 
 	}
+	
 
-	@GetMapping(value = "/client/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Page<InvestmentDTO> getByClient(@RequestParam("id") UserDTO client,
+	@GetMapping(value = "/customer/{investment}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<InvestmentDTO> getByClient(@RequestParam("customer") Long customer,
 			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
 
-		return investmentService.searchByCLient(client, page, size);
+		return investmentService.searchByCustomer(customer, page, size);
 
 	}
+	
+
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable("id") Long id) {

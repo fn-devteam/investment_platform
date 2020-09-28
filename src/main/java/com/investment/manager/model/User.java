@@ -40,7 +40,7 @@ public class User {
 
 	private String password;
 
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "customer")
 	private List<Investment> investment;
 
 	@CreatedDate

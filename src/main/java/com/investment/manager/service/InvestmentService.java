@@ -10,14 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.investment.manager.dto.InvestmentDTO;
-import com.investment.manager.dto.UserDTO;
 import com.investment.manager.mapper.InvestmentMapper;
 import com.investment.manager.model.Investment;
-import com.investment.manager.model.Profile;
 import com.investment.manager.repository.InvestmentRepository;
 
 import javassist.NotFoundException;
@@ -32,40 +29,41 @@ public class InvestmentService {
 	@Autowired
 	private InvestmentMapper investmentMapper;
 
-	public Page<InvestmentDTO> searchByCLient(UserDTO client, int page, int size) throws Exception {
+	public Page<InvestmentDTO> searchByCustomer(Long customer, int page, int size)
+			throws NotFoundException {
 
-		Pageable pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "name");
+		Pageable pageRequest = PageRequest.of(page, size);
 
-		if (client.getProfile().equals(Profile.BROKER)) {
-
-			Page<Investment> investments = investmentRepository.pagedSearchByClient(pageRequest, client.getId());
-
-			List<InvestmentDTO> investmentDTOs = investmentMapper.toDTOs(investments.getContent());
-
-			return new PageImpl<>(investmentDTOs, pageRequest, investments.getTotalElements());
-		}
-
-		throw new Exception("Nothing to show");
-
-	}
-
-	public Page<InvestmentDTO> searchByBroker(UserDTO broker, int page, int size) throws Exception {
-
-		Pageable pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "id");
-		System.out.println("pageRequest" + pageRequest);
-
-		if (broker.getProfile().equals(Profile.BROKER)) {
-
-			Page<Investment> investments = investmentRepository.pagedSearchByBroker(pageRequest, broker.getId());
+		if (customer != 0) {
+			Page<Investment> investments = investmentRepository.pagedSearchByCustomer(pageRequest, customer);
 
 			List<InvestmentDTO> investmentDTOs = investmentMapper.toDTOs(investments.getContent());
 
 			return new PageImpl<>(investmentDTOs, pageRequest, investments.getTotalElements());
 		}
 
-		throw new Exception("Nothing to show");
+		throw new NotFoundException("Nothing to show");
 
 	}
+
+	public Page<InvestmentDTO> searchByBroker(Long broker, int page, int size)
+			throws NotFoundException {
+
+		Pageable pageRequest = PageRequest.of(page, size);
+
+
+		if (broker != 0) {
+			Page<Investment> investments = investmentRepository.pagedSearchByBroker(pageRequest,broker);
+
+			List<InvestmentDTO> investmentDTOs = investmentMapper.toDTOs(investments.getContent());
+
+			return new PageImpl<>(investmentDTOs, pageRequest, investments.getTotalElements());
+		}
+
+		throw new NotFoundException("Nothing to show");
+
+	}
+	
 
 	public void create(InvestmentDTO dto) {
 		Investment investment = investmentMapper.toEntity(dto);

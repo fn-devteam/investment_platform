@@ -35,14 +35,14 @@ public class UserController {
 		return userService.getAll(page, size);
 	}
 
-	@GetMapping(value = "/customers", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/customer", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<UserDTO> getAllCustomers(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
 
 		return userService.getAllCustomers(page, size);
 	}
 
-	@GetMapping(value = "/brokers", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/broker", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<UserDTO> getAllBrokers(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
 
