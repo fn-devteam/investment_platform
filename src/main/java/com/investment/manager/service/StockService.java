@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.investment.manager.dto.StockDTO;
@@ -41,9 +44,15 @@ public class StockService {
 		throw new NotFoundException("Stock type not found");
 	}
 
-	public List<StockDTO> getAll() {
+	public Page<StockDTO> getAll(int page, int size) {
 
-		return stockMapper.toDTOs(stockRepository.findAll());
+		PageRequest pageRequest = PageRequest.of(page, size);
+
+		Page<Stock> stock = stockRepository.findAll(pageRequest);
+
+		List<StockDTO> stockDto = stockMapper.toDTOs(stock.getContent());
+
+		return new PageImpl<>(stockDto, pageRequest, stock.getTotalElements());
 
 	}
 

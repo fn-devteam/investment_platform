@@ -48,7 +48,7 @@ public class InvestmentController {
 
 	@GetMapping(value = "/broker/{broker}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<InvestmentDTO> getByBroker(@RequestParam("broker") UserDTO broker,
-			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(value = "page", required = false) int page,
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
 
 		return investmentService.searchByBroker(broker, page, size);

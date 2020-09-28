@@ -11,8 +11,14 @@ import com.investment.manager.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	
+
 	@Query("SELECT u FROM User u WHERE LOWER(u.name) LIKE %:searchParam%")
 	Page<User> searchByName(@Param("searchParam") String searchParam, Pageable pageable);
-	
+
+	@Query("SELECT u FROM User u WHERE u.profile = 'BROKER' ")
+	Page<User> findAllBrokers(Pageable pageable);
+
+	@Query("SELECT u FROM User u WHERE u.profile = 'CUSTOMER' ")
+	Page<User> findAllCustomers(Pageable pageable);
+
 }

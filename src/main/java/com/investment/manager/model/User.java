@@ -31,47 +31,40 @@ import lombok.Setter;
 @Entity
 @DynamicUpdate
 public class User {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    private String name;
+	private String name;
 
-    private String password;
-        
-    @OneToMany(mappedBy="client")
-    private List<Investment> investment;
+	private String password;
 
-    @CreatedDate
-    private Calendar createdAt;
+	@OneToMany(mappedBy = "client")
+	private List<Investment> investment;
 
-    @Enumerated(EnumType.STRING)
-    private Profile profile;
+	@CreatedDate
+	private Calendar createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Account> accounts;
+	@Enumerated(EnumType.STRING)
+	private Profile profile;
 
-    @ElementCollection
-    @CollectionTable(name = "user_emails", joinColumns = {
-            @JoinColumn(name = "id")
-    })
-    @Column(name = "email")
-    private List<String> emails;
-    
-    @ElementCollection
-    @CollectionTable(name = "user_docs", joinColumns = {
-    		@JoinColumn(name = "id")
-    })
-    @Column(name = "documents")
-    private List<String> documents;
-    
-    @ElementCollection
-    @CollectionTable(name = "user_phones", joinColumns = {
-    		@JoinColumn(name = "id")
-    })
-    @Column(name = "phones")
-    private List<Integer> phones;
-    
-    
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Account> accounts;
+
+	@ElementCollection
+	@CollectionTable(name = "user_emails", joinColumns = { @JoinColumn(name = "id") })
+	@Column(name = "email")
+	private List<String> emails;
+
+	@ElementCollection
+	@CollectionTable(name = "user_docs", joinColumns = { @JoinColumn(name = "id") })
+	@Column(name = "documents")
+	private List<String> documents;
+
+	@ElementCollection
+	@CollectionTable(name = "user_phones", joinColumns = { @JoinColumn(name = "id") })
+	@Column(name = "phones")
+	private List<Integer> phones;
+
 }

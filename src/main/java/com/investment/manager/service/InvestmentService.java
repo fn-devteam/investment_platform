@@ -87,8 +87,9 @@ public class InvestmentService {
 
 		Page<Investment> investmentPage = investmentRepository.findAll(pageRequest);
 
-		return new PageImpl<>(investmentMapper.toDTOs(investmentPage.getContent()), pageRequest,
-				investmentPage.getTotalElements());
+		List<InvestmentDTO> investmentDTO = investmentMapper.toDTOs(investmentPage.getContent());
+
+		return new PageImpl<>(investmentDTO, pageRequest, investmentPage.getTotalElements());
 
 	}
 
