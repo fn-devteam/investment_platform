@@ -8,14 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.investment.manager.model.Bank;
-import com.investment.manager.model.Investment;
 
 @Repository
 public interface BankRepository extends JpaRepository<Bank, String> {
 	
 	@Query(" SELECT b FROM Bank b WHERE b.code = :id")
-	public Page<Investment> pagedSearchByCode(Pageable pageable, @Param("id") String id);
+	public Bank pagedSearchByCode(@Param("id") String id);
 	
-	@Query(" SELECT b FROM Bank b WHERE b.name = :name")
-	public Page<Investment> pagedSearchByName(Pageable pageable, @Param("name") String name);
+	@Query(" SELECT b FROM Bank b WHERE b.name LIKE %:name%")
+	public Page<Bank> pagedSearchByName(Pageable pageable, @Param("name") String name);
 }

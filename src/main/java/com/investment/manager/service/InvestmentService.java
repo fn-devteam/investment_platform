@@ -38,11 +38,9 @@ public class InvestmentService {
 
 		if (client.getProfile().equals(Profile.BROKER)) {
 
-			Page<Investment> investments = investmentRepository.pagedSearchByBroker(pageRequest, client.getId());
-			System.out.println("Page<Invesment> " + investments);
+			Page<Investment> investments = investmentRepository.pagedSearchByClient(pageRequest, client.getId());
 
 			List<InvestmentDTO> investmentDTOs = investmentMapper.toDTOs(investments.getContent());
-			System.out.println("List<InvesmentDTOs> " + investmentDTOs);
 
 			return new PageImpl<>(investmentDTOs, pageRequest, investments.getTotalElements());
 		}
@@ -59,10 +57,8 @@ public class InvestmentService {
 		if (broker.getProfile().equals(Profile.BROKER)) {
 
 			Page<Investment> investments = investmentRepository.pagedSearchByBroker(pageRequest, broker.getId());
-			System.out.println("Page<Invesment> " + investments);
 
 			List<InvestmentDTO> investmentDTOs = investmentMapper.toDTOs(investments.getContent());
-			System.out.println("List<InvesmentDTOs> " + investmentDTOs);
 
 			return new PageImpl<>(investmentDTOs, pageRequest, investments.getTotalElements());
 		}
@@ -87,10 +83,12 @@ public class InvestmentService {
 
 	public Page<InvestmentDTO> getAll(int page, int size) {
 
-		@SuppressWarnings("static-access")
-		Pageable pageRequest = PageRequest.of(page, size, Sort.DEFAULT_DIRECTION.ASC);
+		Pageable pageRequest = PageRequest.of(page, size);
 
-		return new PageImpl<>(investmentMapper.toDTOs(investmentRepository.findAll()), pageRequest, size);
+		Page<Investment> investmentPage = investmentRepository.findAll(pageRequest);
+
+		return new PageImpl<>(investmentMapper.toDTOs(investmentPage.getContent()), pageRequest,
+				investmentPage.getTotalElements());
 
 	}
 
