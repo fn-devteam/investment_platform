@@ -11,12 +11,12 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class BankDTO implements Serializable {
-	
+public class StockTypeDTO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	private String code;
-	
-    private String name;
+
+	private Long id;
+
+	private String name;
 
 }

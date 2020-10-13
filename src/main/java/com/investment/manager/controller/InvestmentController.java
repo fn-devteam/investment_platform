@@ -45,26 +45,23 @@ public class InvestmentController {
 
 	}
 
-	@GetMapping(value = "/broker/{investment}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Page<InvestmentDTO> getByBroker(@RequestParam("broker") Long broker,
-			@RequestParam(value = "page", required = false) int page,
+	@GetMapping(value = "/broker/{broker}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<InvestmentDTO> getByBroker(@PathVariable(value = "broker") Long broker,
+			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
 
 		return investmentService.searchByBroker(broker, page, size);
 
 	}
-	
 
-	@GetMapping(value = "/customer/{investment}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Page<InvestmentDTO> getByClient(@RequestParam("customer") Long customer,
+	@GetMapping(value = "/customer/{customer}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<InvestmentDTO> getByClient(@PathVariable(value = "customer") Long customer,
 			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(value = "size", required = false, defaultValue = "10") int size) throws Exception {
 
 		return investmentService.searchByCustomer(customer, page, size);
 
 	}
-	
-
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable("id") Long id) {

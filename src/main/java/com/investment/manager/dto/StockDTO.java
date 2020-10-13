@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-import com.investment.manager.model.StockStatus;
-import com.investment.manager.model.StockType;
-import com.investment.manager.model.User;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,20 +13,22 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class StockDTO implements Serializable{
-	
+public class StockDTO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 
-	private StockType type;
+	private StockTypeDTO type;
+
+	private List<StockStatusDTO> status;
 
 	private String name;
-	
-	private User creator;
+
+	private UserDTO creator;
 
 	private Date creationDate;
-	
+
 	private String description;
 
 	private Double liquidity;
@@ -40,8 +38,5 @@ public class StockDTO implements Serializable{
 	private Double availQuantity;
 
 	private Double quotaValue;
-
-	private List<StockStatus> status;
-
 
 }

@@ -4,28 +4,22 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
-import com.investment.manager.model.InvestmentStatus;
-import com.investment.manager.model.Stock;
-import com.investment.manager.model.User;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 public class InvestmentDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 
-	private Stock stock;
+	private StockDTO stock;
 
 	private String notice;
 
@@ -47,10 +41,10 @@ public class InvestmentDTO implements Serializable {
 
 	private Calendar endInvestment;
 
-	private User broker;
+	private UserDTO broker;
 
-	private User client;
+	private UserDTO customer;
 
-	private List<InvestmentStatus> status;
+	private List<InvestmentStatusDTO> status;
 
 }
