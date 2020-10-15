@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
-import com.investment.manager.model.Account;
 import com.investment.manager.model.Profile;
 
 import lombok.Getter;
@@ -30,7 +29,7 @@ public class UserDTO implements Serializable {
 
 	private Profile profile;
 
-	private List<Account> accounts;
+	private List<AccountDTO> accounts;
 
 	private List<String> emails;
 
