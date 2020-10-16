@@ -6,28 +6,35 @@ import java.util.List;
 
 import com.investment.manager.model.Profile;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 public class UserDTO implements Serializable {
 
-	private String id;
-	
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
+
 	private String name;
 
-    private String password;
+	private String password;
 
-    private Calendar createdAt;
+	private Calendar createdAt;
 
-    private Profile profile;
+	private Profile profile;
 
-    private List<String> emails;
+	private List<AccountDTO> accounts;
+
+	private List<String> emails;
+
+	private List<String> documents;
+
+	private List<Integer> phones;
+
 }

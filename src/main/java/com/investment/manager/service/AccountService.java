@@ -6,6 +6,10 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.investment.manager.dto.AccountDTO;
@@ -48,9 +52,17 @@ public class AccountService {
 
 	}
 
-	public List<AccountDTO> getAll() {
+	public Page<AccountDTO> getAll(int page, int size) {
 
-		return accountMapper.toDTOs(accountRepository.findAll());
+		Pageable pageRequest = PageRequest.of(page, size);
+
+		Page<Account> account = accountRepository.findAll(pageRequest);
+
+		List<AccountDTO> accountDTO = accountMapper.toDTOs(account.getContent());
+
+		return new PageImpl<>(accountDTO, pageRequest, account.getTotalElements());
 
 	}
+	
+
 }

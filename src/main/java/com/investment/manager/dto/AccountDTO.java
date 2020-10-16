@@ -2,25 +2,22 @@ package com.investment.manager.dto;
 
 import java.io.Serializable;
 
-import com.investment.manager.model.Bank;
-import com.investment.manager.model.User;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class AccountDTO implements Serializable{
+@SuperBuilder
+public class AccountDTO implements Serializable {
+	
+	 private static final long serialVersionUID = 1L;
 
 	 private Long id;
 	
-	 private Bank bank;
+	 private BankDTO bank;
 
 	 private String agency;
 
@@ -30,5 +27,5 @@ public class AccountDTO implements Serializable{
 
 	 private String accountDigit;
 
-	 private User user;
+	 private UserDTO user;
 }

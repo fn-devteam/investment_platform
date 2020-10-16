@@ -58,7 +58,7 @@ public class Investment {
 	private User broker;
 	
 	@ManyToOne
-	private User client;
+	private User customer;
 	
 	@OneToMany( mappedBy = "investment")
 	private List<InvestmentStatus> status;

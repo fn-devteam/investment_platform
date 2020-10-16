@@ -6,6 +6,10 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.investment.manager.dto.BankDTO;
@@ -19,34 +23,42 @@ import javassist.NotFoundException;
 @Transactional
 public class BankService {
 
-    @Autowired
-    private BankRepository bankRepository;
+	@Autowired
+	private BankRepository bankRepository;
 
-    @Autowired
-    private BankMapper bankMapper;
+	@Autowired
+	private BankMapper bankMapper;
 
-    public void create(BankDTO dto) {
+	public void create(BankDTO dto) {
 
-        Bank bank = bankMapper.toEntity(dto);
-        bankRepository.save(bank);
-    }
+		Bank bank = bankMapper.toEntity(dto);
+		bankRepository.save(bank);
+	}
 
-    public BankDTO get(Long id) throws NotFoundException {
+	public BankDTO getById(String id) throws NotFoundException {
 
-        Optional<Bank> bank = bankRepository.findById(id);
+		Optional<Bank> bank = bankRepository.findById(id);
 
-        if (bank.isPresent())
-            return bankMapper.toDTO(bank.get());
+		if (bank.isPresent())
+			return bankMapper.toDTO(bank.get());
 
-        throw new NotFoundException("Bank not found");
-    }
+		throw new NotFoundException("Bank not found");
+	}
 
-    public void delete(Long id) {
+	public void delete(String id) {
+		bankRepository.deleteById(id);
+	}
 
-        bankRepository.deleteById(id);
-    }
+	public Page<BankDTO> getAll(int page, int size) {
 
-    public List<BankDTO> getAll() {
-        return bankMapper.toDTOs(bankRepository.findAll());
-    }
+		Pageable pageRequest = PageRequest.of(page, size);
+
+		Page<Bank> banks = bankRepository.findAll(pageRequest);
+
+		List<BankDTO> bankDtos = bankMapper.toDTOs(banks.getContent());
+
+		return new PageImpl<>(bankDtos, pageRequest, banks.getTotalElements());
+	}
+	
+	
 }

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,7 +35,11 @@ public class Stock {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="type_id", referencedColumnName="id")
 	private StockType type;
+	
+	@OneToMany(mappedBy = "stock")
+	private List<StockStatus> status;
 
 	private String name;
 	
@@ -55,7 +60,6 @@ public class Stock {
 
 	private Double quotaValue;
 
-	@OneToMany(mappedBy = "stock")
-	private List<StockStatus> status;
+	
 
 }
